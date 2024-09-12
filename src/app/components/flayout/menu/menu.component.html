@@ -1,0 +1,142 @@
+<div id="menu-container" class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100" ng-class="{'disabled-link': isDisabled}">
+    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-secondary text-decoration-none">
+        <span class="fs-5 d-none d-sm-inline animate-zoom-in">TE-ToolKit</span>
+    </a>
+    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+        <li class="nav-item">
+            <a href="/dashboard" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-speedometer2" data-bs-toggle="tooltip" title="Dashboard"></i>
+                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+            </a>
+        </li>
+        <li >
+            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-clipboard-data" data-bs-toggle="tooltip" title="Reporting"></i>
+                <span class="ms-1 d-none d-sm-inline dropdown-toggle">Reporting</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                <li class="w-100">
+                    <a href="/te-health" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">TE-Health</span> (HC)
+                    </a>
+                </li>
+                <li>
+                    <a href="/as-built" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Config Report</span> (CR)
+                    </a>
+                </li>
+                <li>
+                    <a href="/alerts" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Alerts Report</span> (AR)
+                    </a>
+                </li>
+                <li>
+                    <a href="/ps-closure-docs" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">PS Closure Docs</span> (CD)
+                    </a>
+                </li>
+                <li>
+                    <a href="/tam-weekly-report" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Weekly Report</span> (WR)
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-person-fill-gear" data-bs-toggle="tooltip" title="Support"></i>
+                <span class="ms-1 d-none d-sm-inline dropdown-toggle">Support</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                <li class="w-100">
+                    <a href="/support" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Pcap</span> 1
+                    </a>
+                </li>
+                    <li>
+                        <a href="/diAgnostic-tool" class="nav-link px-0">
+                            <span class="d-none d-sm-inline">Diagnostic Tool</span> (DT)
+                        </a>
+                    </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle dropdown-toggle">
+                <i class="fs-4 bi-hammer" data-bs-toggle="tooltip" title="Bulk Tools"></i>
+                <span class="ms-1 d-none d-sm-inline">Tools</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                <li>
+                    <a href="/users" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Bulk-Users</span> (BU)
+                    </a>
+                </li>
+                <li>
+                    <a href="/tests" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Bulk-Tests</span> (BT)
+                    </a>
+                </li>
+                <li>
+                    <a href="/agents-ops" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Bulk-Labels</span> (BL)
+                    </a>
+                </li>
+                <li>
+                    <a href="/migrate-alerts" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Alerts Migration</span> (AM)
+                    </a>
+                </li>
+                <li>
+                  <a href="/backup-restore" class="nav-link px-0">
+                      <span class="d-none d-sm-inline">Backup and Restore</span> (BR)
+                  </a>
+                </li>
+            </ul>
+        </li>
+        <li >
+            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle dropdown-toggle">
+                <i class="fs-4 bi-file-earmark-code" data-bs-toggle="tooltip" title="Scripts"></i>
+                <span class="ms-1 d-none d-sm-inline">Scripts</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                <li class="w-100">
+                    <a href="#" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Agents</span> (EAS)
+                    </a>
+                </li>
+                <li class="w-100">
+                    <a href="#" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Alerts</span> (ATS)
+                    </a>
+                </li>
+                <li class="w-100">
+                    <a href="#" class="nav-link px-0">
+                        <span class="d-none d-sm-inline">Dashboards</span> (DBS)
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/feedback" class="nav-link px-0 align-middle animate-fade-in">
+                <i class="fs-4 bi-mailbox" data-bs-toggle="tooltip" title="Feedback"></i>
+                <span class="ms-1 d-none d-sm-inline">Feedback</span>
+            </a>
+        </li>
+        <li>
+            <a href="/engage-us" class="nav-link px-0 align-middle animate-slide-in">
+                <i class="fs-4 bi-person-raised-hand" data-bs-toggle="tooltip" title="How to Engage Us"></i>
+                <span class="ms-1 d-none d-sm-inline">How to Engage Us</span>
+            </a>
+        </li>
+        <br>
+        <br>
+        <hr class="w-100">
+        <li>
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none animate-bounce-in" id="dropdownUser1" aria-expanded="false">
+            <i class="fs-4 bi-box-arrow-left" data-bs-toggle="tooltip" title="Logout"></i>
+            <span class="d-none d-sm-inline mx-1">Logout</span>
+        </a>
+        </li>
+    </ul>
+</div>
+
