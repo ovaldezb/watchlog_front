@@ -23,6 +23,6 @@ export class LoginComponent implements OnInit{
       confirmButtonText: 'Cool'
     });
     
-  }
+  } ///vavavava
 
 }
