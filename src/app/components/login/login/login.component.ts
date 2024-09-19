@@ -1,28 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { LayoutComponent } from "../../flayout/layout/layout.component";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavbarComponent } from "../../flayout/navbar/navbar.component";
-import { MenuComponent } from "../../flayout/menu/menu.component";
-import { FooterComponent } from "../../flayout/footer/footer.component";
 import Swal from 'sweetalert2';
+import { LoginFormComponent } from "../login-form/login-form.component";
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [LayoutComponent, NavbarComponent, MenuComponent, FooterComponent],
+  imports: [NavbarComponent, LoginFormComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnDestroy{
 
-  ngOnInit(): void {
-    Swal.fire({
-      title: 'Error!',
-      text: 'Do you want to continue',
-      icon: 'error',
-      confirmButtonText: 'Cool'
-    });
+
+  ngOnDestroy() {
+    // Limpia referencias si es necesario
+  }
+  
+
     
-  } ///vavavava
-
 }

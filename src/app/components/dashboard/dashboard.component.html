@@ -1,11 +1,13 @@
-<app-navbar></app-navbar><!-- * * * * * * * Navbar * * * * * * * -->
+<app-navbar><!-- * * * * * * * Navbar * * * * * * * -->
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-lg-2 px-sm-2 px-1 bg-dark">
+            <app-menu></app-menu><!-- * * * * * * * Side Menu * * * * * * * -->
         </div>
         <div class="col py-3">
             <!-- * * * * * * * Content Area * * * * * * * -->
-            <app-login-form></app-login-form>
+        <app-dashboard-form></app-dashboard-form>   
         </div><!-- * * * * * * * Content Area * * * * * * * -->
     </div>
 </div>
+<app-footer></app-footer>
