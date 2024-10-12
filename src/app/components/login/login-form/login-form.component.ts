@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnDestroy {
 
   constructor(
 
-    private router: Router,
+    private readonly router: Router,
 
 
   ) { this.isAuthenticated = false; }

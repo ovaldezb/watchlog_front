@@ -1,0 +1,54 @@
+<div class="container mt-4">
+    <h2>Bitácora de Vigilancia</h2>
+  
+    <!-- Tabla de entradas -->
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Nombre del Vigilante</th>
+          <th scope="col">Actividad</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of logEntries">
+          <td>{{ entry.date }}</td>
+          <td>{{ entry.time }}</td>
+          <td>{{ entry.guardName }}</td>
+          <td>{{ entry.activity }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editEntry(entry)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteEntry(entry)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Formulario de edición -->
+    <div *ngIf="editingEntry" class="mt-4">
+      <h3>Editar Entrada</h3>
+      <form (ngSubmit)="saveEntry()">
+        <div class="form-group">
+          <label for="date">Fecha</label>
+          <input type="date" id="date" class="form-control" [(ngModel)]="editingEntry.date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="time">Hora</label>
+          <input type="time" id="time" class="form-control" [(ngModel)]="editingEntry.time" name="time" required>
+        </div>
+        <div class="form-group">
+          <label for="guardName">Nombre del Vigilante</label>
+          <input type="text" id="guardName" class="form-control" [(ngModel)]="editingEntry.guardName" name="guardName" required>
+        </div>
+        <div class="form-group">
+          <label for="activity">Actividad</label>
+          <textarea id="activity" class="form-control" [(ngModel)]="editingEntry.activity" name="activity" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  
