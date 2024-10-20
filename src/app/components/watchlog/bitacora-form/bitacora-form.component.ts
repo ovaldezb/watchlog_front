@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LogEntry } from 'src/app/models/log-entry';
+import { BitacoraService } from 'src/app/services/bitacora.service';
 
 @Component({
   selector: 'app-bitacora-form',
@@ -8,43 +9,67 @@ import { LogEntry } from 'src/app/models/log-entry';
 })
 export class BitacoraFormComponent implements OnInit {
 
-  logEntries: LogEntry[] = [
-    { id: 1, date: '2024-10-01', time: '08:00', guardName: 'Juan Ocampo', activity: 'Ronda inicial, todo en orden' },
-    { id: 2, date: '2024-10-01', time: '12:00', guardName: 'Juan Ocampo', activity: 'Revisión de cámaras de seguridad' },
-    { id: 3, date: '2024-10-01', time: '16:00', guardName: 'Luis González', activity: 'Ronda de relevo, todo en orden' },
-    { id: 4, date: '2024-10-02', time: '00:00', guardName: 'Luis González', activity: 'Reporte de actividad sospechosa' }
-  ];
+  logEntries: LogEntry[] = [];
+  editingEntry: boolean = false;
+  currentEntry: LogEntry = this.initializeEntry();
+  loading: boolean = true;
 
-  editingEntry: LogEntry | null = null;
+  constructor(private readonly logEntryService: BitacoraService) { }
 
-  constructor() { }
+  ngOnInit(): void {
 
-  ngOnInit(): void {}
+    this.loadLogEntries();
+
+  }
+  loadLogEntries(): void {
+    this.logEntryService.getLogEntries().subscribe((entries) => {
+      this.logEntries = entries;
+    });
+  }
+
+  initializeEntry(): LogEntry {
+    return {
+      id: 0,
+      fecha: '',
+      horaIncidente: '',
+      turno: '',
+      tipoIncidente: '',
+      descripcion: '',
+      informacionAdicional: ''
+    };
+  }
+
+  addLogEntry(): void {
+    this.logEntryService.addLogEntry(this.currentEntry).subscribe((entry) => {
+      this.logEntries.push(entry);
+      this.currentEntry = this.initializeEntry(); // Limpiar el formulario
+    });
+  }
 
   editEntry(entry: LogEntry): void {
-    // Crear una copia para editar sin modificar la original
-    this.editingEntry = { ...entry };
+    this.currentEntry = { ...entry }; // Copiar los datos para editar
+    this.editingEntry = true;
   }
 
   saveEntry(): void {
-    if (this.editingEntry) {
-      // Buscar el índice de la entrada que estamos editando
-      const index = this.logEntries.findIndex(e => e.id === this.editingEntry?.id);
-      if (index !== -1) {
-        // Actualizar la entrada en la lista de entradas
-        this.logEntries[index] = this.editingEntry;
-        this.editingEntry = null; // Limpiar el formulario
-      }
+    if (this.currentEntry.id) {
+      this.logEntryService
+        .updateLogEntry(this.currentEntry.id.toString(), this.currentEntry)
+        .subscribe(() => {
+          this.loadLogEntries(); // Recargar la lista de entradas
+          this.cancelEdit();
+        });
     }
   }
 
+  deleteEntry(id: number): void {
+    this.logEntryService.deleteLogEntry(id.toString()).subscribe(() => {
+      this.loadLogEntries(); // Recargar la lista después de eliminar
+    });
+  }
+
   cancelEdit(): void {
-    this.editingEntry = null; // Cancelar la edición y limpiar el formulario
+    this.editingEntry = false;
+    this.currentEntry = this.initializeEntry(); // Resetear el formulario
   }
-
-  deleteEntry(entry: LogEntry): void {
-    // Filtrar la entrada seleccionada fuera del array
-    this.logEntries = this.logEntries.filter(e => e.id !== entry.id);
-  }
-
 }
