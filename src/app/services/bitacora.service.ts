@@ -34,14 +34,14 @@ export class BitacoraService {
   // Actualizar entrada existente
   updateLogEntry(id: string, entry: LogEntry): Observable<LogEntry> {
 
-    return this.http.put<LogEntry>(`${this.apiUrl}${id}`, entry);
+    return this.http.put<LogEntry>(`${this.apiUrl + 'bitacora/'}${id}`, entry);
   
   }
 
   // Eliminar entrada por ID
   deleteLogEntry(id: string): Observable<void> {
   
-    return this.http.delete<void>(`${this.apiUrl}${id}`);
+    return this.http.delete<void>(`${this.apiUrl + 'bitacora/'}${id}`);
   
   }
 

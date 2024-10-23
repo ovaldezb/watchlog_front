@@ -1,6 +1,6 @@
 export interface LogEntry {
 
-    id: number;
+    id: string;
     turno: string;
     fecha: string; // Usaremos ISO 8601 para fecha y hora
     horaIncidente: string;

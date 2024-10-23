@@ -29,7 +29,7 @@ export class BitacoraFormComponent implements OnInit {
 
   initializeEntry(): LogEntry {
     return {
-      id: 0,
+      id: '',
       fecha: '',
       horaIncidente: '',
       turno: '',
@@ -47,29 +47,36 @@ export class BitacoraFormComponent implements OnInit {
   }
 
   editEntry(entry: LogEntry): void {
-    this.currentEntry = { ...entry }; // Copiar los datos para editar
+    console.log('ID a editar:', entry.id); // Verifica el ID
+    this.currentEntry = { ...entry };
     this.editingEntry = true;
   }
 
   saveEntry(): void {
     if (this.currentEntry.id) {
       this.logEntryService
-        .updateLogEntry(this.currentEntry.id.toString(), this.currentEntry)
-        .subscribe(() => {
-          this.loadLogEntries(); // Recargar la lista de entradas
-          this.cancelEdit();
+        .updateLogEntry(this.currentEntry.id, this.currentEntry)
+        .subscribe({
+          next: () => {
+            console.log('Entrada actualizada correctamente');
+            this.loadLogEntries();
+            this.cancelEdit();
+          },
+          error: (error) => console.error('Error al actualizar la entrada:', error)
         });
     }
   }
 
-  deleteEntry(id: number): void {
-    this.logEntryService.deleteLogEntry(id.toString()).subscribe(() => {
-      this.loadLogEntries(); // Recargar la lista después de eliminar
+  deleteEntry(entry: LogEntry): void {
+    this.logEntryService.deleteLogEntry(entry.id).subscribe({
+      next: () => this.loadLogEntries(),
+      error: (error) => console.error('Error al eliminar la entrada:', error)
     });
   }
 
+
   cancelEdit(): void {
     this.editingEntry = false;
-    this.currentEntry = this.initializeEntry(); // Resetear el formulario
+    this.currentEntry = this.initializeEntry(); // Reiniciar el formulario
   }
 }
