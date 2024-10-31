@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError, catchError } from 'rxjs';
 import { LogEntry } from '../models/log-entry'; // Asegúrate que el modelo esté correctamente importado
 
 @Injectable({
@@ -20,11 +20,18 @@ export class BitacoraService {
   }
 
   getLogEntries(): Observable<LogEntry[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
 
-    return this.http.get<LogEntry[]>(this.apiUrl + 'bitacora');
-
+    return this.http.get<LogEntry[]>(`${this.apiUrl}bitacora`, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching log entries:', error);
+        return throwError(() => new Error('Error fetching log entries, inténtelo más tarde.'));
+      })
+    );
   }
-
+  
   addLogEntry(entry: LogEntry): Observable<LogEntry> {
 
     return this.http.post<LogEntry>(this.apiUrl, entry);

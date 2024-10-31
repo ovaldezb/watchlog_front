@@ -5,7 +5,8 @@ import { BitacoraService } from 'src/app/services/bitacora.service';
 @Component({
   selector: 'app-bitacora-form',
   templateUrl: './bitacora-form.component.html',
-  styleUrl: './bitacora-form.component.scss'
+  styleUrl: './bitacora-form.component.scss',
+  providers: [BitacoraService]
 })
 export class BitacoraFormComponent implements OnInit {
 
@@ -22,8 +23,12 @@ export class BitacoraFormComponent implements OnInit {
 
   }
   loadLogEntries(): void {
-    this.logEntryService.getLogEntries().subscribe((entries) => {
-      this.logEntries = entries;
+
+    this.logEntryService.getLogEntries().subscribe((res) => {
+    
+      console.log("Console Log" + res);
+      this.logEntries = res;
+    
     });
   }
 
